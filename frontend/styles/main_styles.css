@@ -934,7 +934,7 @@ section
 
 .avds_small
 {
-	width: calc((100% * 0.5) - 15px);
+	width: calc((100% * 0.391) - 15px);
 	height: 100%;
 	padding: 30px;
 }
