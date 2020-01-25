@@ -1418,7 +1418,7 @@ section
 {
 	font-size: 30px;
 	line-height: 0.75;
-	color: #1b1b1b;
+	color: #ffffff;
 	font-weight: 700;
 }
 .copyright
@@ -1427,12 +1427,13 @@ section
 	text-align: center;
 	font-size: 14px;
 	font-weight: 400;
-	color: #1b1b1b;
+	color: #ffffff;
 }
 .footer_social
 {
 	width: 30%;
 	text-align: right;
+	color: #ffffff;
 }
 .footer_social ul li
 {
@@ -1445,7 +1446,7 @@ section
 .footer_social ul li a i
 {
 	font-size: 17px;
-	color: #1b1b1b;
+	color: #ffffff;
 	-webkit-transition: all 200ms ease;
 	-moz-transition: all 200ms ease;
 	-ms-transition: all 200ms ease;
