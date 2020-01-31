@@ -53,13 +53,13 @@
 	<!-- Home -->
 
 	<div class="home">
-		<div class="home_slider_container">
+		<div class="home_slider_container" >
 			
 			<!-- Home Slider -->
-			<div class="owl-carousel owl-theme home_slider">
+			<div class="owl-carousel owl-theme home_slider owl-loaded owl-drag" > 
 				
 				<!-- Slider Item -->
-				<div class="owl-item home_slider_item">
+				<div class="owl-item home_slider_item" >
 					<div class="home_slider_background" style="background-image:url(site_assets/images/home_slider_1.jpg)"></div>
 					<div class="home_slider_content_container">
 						<div class="container">

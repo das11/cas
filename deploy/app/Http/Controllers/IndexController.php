@@ -38,7 +38,7 @@ class IndexController extends Controller
     }
 
     public function xiaomi(){
-        return view("_particles.xiaomi");
+        return view("_particles.mi");
     }
     
     
