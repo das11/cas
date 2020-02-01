@@ -3,7 +3,7 @@
 
 <div class="product_details">
 		<div class="container">
-			<div class="row details_row">
+			<div class="row details_row" style="padding-top:5%">
 
 				<!-- Product Image -->
 				<div class="col-lg-6">
