@@ -33,8 +33,11 @@ Auth::routes();
 
 Route::get("/", "IndexController@index");
 Route::get("/login", "IndexController@login");
+Route::post("/login", "IndexController@postLogin");
 Route::get("/signup", "IndexController@signup");
+Route::post("/signup", "IndexController@post_signup");
 Route::get("/products", "IndexController@products");
 Route::get("/hpworlds", "IndexController@hpworlds");
 Route::get("/asus", "IndexController@asus");
 Route::get("/xiaomi", "IndexController@xiaomi");
+Route::get("/cart", "IndexController@cart");

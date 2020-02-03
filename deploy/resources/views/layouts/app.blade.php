@@ -14,6 +14,7 @@
 <link rel="stylesheet" type="text/css" href="{{ URL::asset('site_assets/css/main_styles.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ URL::asset('site_assets/css/responsive.css') }}">
 
+
 <!-- LOGIN  -->
 <link href="{{ URL::asset('site_assets/plugins/font-awesome-4.7.0/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css"> -->
 <link rel="stylesheet" type="text/css" href="{{ URL::asset('site_assets/css/contact.css') }}">
@@ -29,6 +30,10 @@
 <link rel="stylesheet" type="text/css" href="{{ URL::asset('site_assets/css/categories.css') }}">
 
 <link rel="stylesheet" type="text/css" href="{{ URL::asset('site_assets/css/categories_responsive.css') }}">
+
+<!-- CART -->
+<link rel="stylesheet" type="text/css" href="{{ URL::asset('site_assets/css/cart.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ URL::asset('site_assets/css/cart_responsive.css') }}">
 </head>
 <body>
 @include("_particles.header")
@@ -53,5 +58,6 @@
 <script src="{{ URL::asset('site_assets/js/contact.js') }}"></script>
 <script src="{{ URL::asset('site_assets/js/product.js') }}"></script>
 <script src="{{ URL::asset('site_assets/js/categories.js') }}"></script>
+<script src="{{ URL::asset('site_assets/js/cart.js') }}"></script>
 </body>
 </html>

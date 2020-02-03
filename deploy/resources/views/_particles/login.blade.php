@@ -35,22 +35,25 @@
                         <div class="section_title">Sign in</div>
                         <div class="section_subtitle">to continue with us</div>
 						<div class="contact_form_container">
+						{!! Form::open(array('url' => 'login','class'=>'','id'=>'signup','role'=>'form')) !!}
 							<form action="#" id="contact_form" class="contact_form">
                                 
 						        <div>
 									<!-- User ID -->
 									<label for="contact_company">EMAIL ADDRESS</label>
-									<input type="text" id="contact_company" class="contact_input">
+									<input name="email" id="contact_company" placeholder="name@address.com" type="email" required data-msg="Please enter your email" class="contact_input">
                                 </div>
                                 <div>
 									<!-- Password -->
 									<label for="contact_company">PASSWORD</label>
-									<input type="text" id="contact_company" class="contact_input">
+									<input name="password" id="contact_company" placeholder="Password" type="password" required data-msg="Please enter your password" class="contact_input">
+									
 								</div>
 								
-                                <button class="button contact_button"><span>Log In</span></button>
-                                <button class="button contact_button"><span>Sign Up</span></button>
+                                <button type="submit" class="button contact_button"><span>Log In</span></button>
+                                <button type="submit" class="button contact_button"><span>Sign Up</span></button>
 							</form>
+						{!! Form::close() !!} 
 						</div>
 					</div>
 				</div>

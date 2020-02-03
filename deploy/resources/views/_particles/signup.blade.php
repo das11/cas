@@ -34,39 +34,48 @@
                         <div class="section_title">Sign up</div>
                         <div class="section_subtitle">to continue with us</div>
 						<div class="contact_form_container">
+						{!! Form::open(array('url' => 'signup','class'=>'','id'=>'signup','role'=>'form')) !!}
 							<form action="#" id="contact_form" class="contact_form">
                                 <div class="row">
 									<div class="col-xl-6">
 										<!-- Name -->
 										<label for="contact_name">FIRST NAME*</label>
-										<input type="text" id="contact_name" class="contact_input" required="required">
+										
+										<input name="first_name" id="contact_name" type="text" placeholder="First Name" autocomplete="off" required data-msg="Please enter your First Name" class="contact_input" required="required">
 									</div>
 									<div class="col-xl-6 last_name_col">
 										<!-- Last Name -->
 										<label for="contact_last_name">LAST NAME*</label>
-										<input type="text" id="contact_last_name" class="contact_input" required="required">
+										<input name="last_name" id="contact_name" type="text" placeholder="Last Name" autocomplete="off" required data-msg="Please enter your Last Name" class="contact_input" required="required">
 									</div>
 								</div>
                                 
 						        <div>
 									<!-- User ID -->
 									<label for="contact_company">EMAIL ADDRESS</label>
-									<input type="text" id="contact_company" class="contact_input">
+									<input name="email" type="text" id="contact_company" class="contact_input" placeholder="name@address.com" required data-msg="Please enter your email">
+									
                                 </div>
                                 <div>
 									<!-- Password -->
 									<label for="contact_company">PASSWORD</label>
-									<input type="text" id="contact_company" class="contact_input">
+									
+									<input name="password" id="contact_company" placeholder="Password" type="password" required data-msg="Please enter your password" class="contact_input">
+                                </div>
+								<div>
+                                        <label for="loginPassword2" class="form-label"> CONFIRM YOUR PASSWORD</label>
+                                        <input name="password2" id="contact_company" placeholder=" Confirm Password" type="password" required data-msg="Please enter your password" class="contact_input">
                                 </div>
                                 <div>
 									<!-- Phone Number -->
 									<label for="contact_company">PHONE NUMBER</label>
-									<input type="text" id="contact_company" class="contact_input">
+									<input name="contact" id="contact_company" type="number"  placeholder="Phone Number"  class="contact_input">
 								</div>
 								
                                
-                                <button class="button contact_button"><span>Sign Up</span></button>
+                                <button type="submit" class="button contact_button"><span>Sign Up</span></button>
 							</form>
+							{!! Form::close() !!} 
 						</div>
 					</div>
 				</div>
