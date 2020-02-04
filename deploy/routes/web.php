@@ -41,3 +41,5 @@ Route::get("/hpworlds", "IndexController@hpworlds");
 Route::get("/asus", "IndexController@asus");
 Route::get("/xiaomi", "IndexController@xiaomi");
 Route::get("/cart", "IndexController@cart");
+
+Route::get('/cart/{id}', 'IndexController@addToCart');

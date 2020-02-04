@@ -45,17 +45,19 @@
 					<!-- Cart Item -->
 					<div class="cart_item d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start">
 						<!-- Name -->
+                        @foreach($errors as $item)
+
 						<div class="cart_item_product d-flex flex-row align-items-center justify-content-start">
 							<div class="cart_item_image">
-								<div><img src="site_assets/images/cart_1.jpg" alt=""></div>
+								<div><img src="{{ URL::asset('upload/featured_image/'.$item->feature_image.'-b.jpg') }}" alt=""></div>
 							</div>
 							<div class="cart_item_name_container">
-								<div class="cart_item_name"><a href="#">Smart Phone Deluxe Edition</a></div>
+								<div class="cart_item_name"><a href="#"> {{ $item->name }}</a></div>
 								<div class="cart_item_edit"><a href="#">Edit Product</a></div>
 							</div>
 						</div>
 						<!-- Price -->
-						<div class="cart_item_price">$790.90</div>
+						<div class="cart_item_price"> {{ $item->price }}</div>
 						<!-- Quantity -->
 						<div class="cart_item_quantity">
 							<div class="product_quantity_container">
@@ -71,6 +73,7 @@
 						</div>
 						<!-- Total -->
 						<div class="cart_item_total">$790.90</div>
+                        @endforeach
 					</div>
 
 				</div>

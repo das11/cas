@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Products;
 use Auth;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -16,7 +17,11 @@ use Illuminate\Support\Facades\Input;
 class IndexController extends Controller
 {
     public function index(){
-        return view("_particles.index");
+        $products = new Products;
+        $products = Products::all();
+ 
+        
+        return view("_particles.index",  compact('products'));
     }
     public function login(){
         if(Auth::check())
@@ -106,6 +111,7 @@ class IndexController extends Controller
     public function products(){
         return view("_particles.products");
     }
+
     public function hpworlds(){
         return view("_particles.hp");
 
@@ -122,6 +128,59 @@ class IndexController extends Controller
     public function cart(){
         return view("_particles.cart");
 
+    }
+
+    public function addToCart($id)
+    {
+        $product = Products::find($id);
+ 
+        if(!$product) {
+ 
+            abort(404);
+ 
+        }
+ 
+        $cart = session()->get('cart');
+ 
+        // if cart is empty then this the first product
+        if(!$cart) {
+ 
+            $cart = [
+                    $id => [
+                        "name" => $product->name,
+                        "quantity" => 1,
+                        "price" => $product->price,
+                        "featured_image" => $product->featured_image
+                    ]
+            ];
+ 
+            session()->put('cart', $cart);
+ 
+            return redirect()->back()->with('success', 'Product added to cart successfully!');
+        }
+ 
+        // if cart not empty then check if this product exist then increment quantity
+        if(isset($cart[$id])) {
+ 
+            $cart[$id]['quantity']++;
+ 
+            session()->put('cart', $cart);
+ 
+            return redirect()->back()->with('success', 'Product added to cart successfully!');
+ 
+        }
+ 
+        // if item not exist in cart then add to cart with quantity = 1
+        $cart[$id] = [
+            "name" => $product->name,
+            "quantity" => 1,
+            "price" => $product->price,
+            "featured_image" => $product->featured_image
+        ];
+ 
+        session()->put('cart', $cart);
+ 
+        return redirect()->back()->with('success', 'Product added to cart successfully!');
     }
     
 
