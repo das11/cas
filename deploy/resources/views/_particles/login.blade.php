@@ -43,7 +43,8 @@
 									<label for="contact_company">EMAIL ADDRESS</label>
 									<input name="email" id="contact_company" placeholder="name@address.com" type="email" required data-msg="Please enter your email" class="contact_input">
                                 </div>
-                                <div>
+                                
+								<div>
 									<!-- Password -->
 									<label for="contact_company">PASSWORD</label>
 									<input name="password" id="contact_company" placeholder="Password" type="password" required data-msg="Please enter your password" class="contact_input">
@@ -57,4 +58,7 @@
 						</div>
 					</div>
 				</div>
+				</div>
+			</div>
+		</div>
 @endsection

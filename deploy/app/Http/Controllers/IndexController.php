@@ -183,9 +183,16 @@ class IndexController extends Controller
         return redirect()->back()->with('success', 'Product added to cart successfully!');
     }
     
+    public function addProduct(){
+        return view("_particles.addproduct");
 
+    }
     
+    
+    public function dashboard(){
+        return view("_particles.dashboard");
 
+    }
     
 
     
