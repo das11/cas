@@ -34,7 +34,9 @@
                         <div class="section_title">Sign up</div>
                         <div class="section_subtitle">to continue with us</div>
 						<div class="contact_form_container">
+
 						{!! Form::open(array('url' => 'signup','class'=>'','id'=>'signup','role'=>'form')) !!}
+						
 							<form action="#" id="contact_form" class="contact_form">
                                 <div class="row">
 									<div class="col-xl-6">

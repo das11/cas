@@ -44,4 +44,4 @@ Route::get("/cart", "IndexController@cart");
 Route::get("/dashboard", "IndexController@dashboard");
 Route::get("/addproduct", "IndexController@addProduct");
 
-Route::get('/cart/{id}', 'IndexController@addToCart');
+Route::get('/addtocart', 'IndexController@addToCart');

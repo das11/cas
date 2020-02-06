@@ -44,7 +44,7 @@
 									<div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fa fa-chevron-down" aria-hidden="true"></i></div>
 								</div>
 							</div>
-							<div class="button cart_button"><a href="/cart/{id}">Add to cart</a></div>
+							<div class="button cart_button"><a href="/addtocart?id=7">Add to cart</a></div>
 						</div>
 
 						<!-- Share -->

@@ -8,7 +8,7 @@ use App\Parkings;
 use App\Bookings;
 use App\referrals;
 
-class IndexController_ref extends Controller
+class IndexController extends Controller
 {
     public function register_individual(){
         return view("auth.register_individual");
