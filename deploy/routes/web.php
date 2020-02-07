@@ -43,5 +43,5 @@ Route::get("/xiaomi", "IndexController@xiaomi");
 Route::get("/cart", "IndexController@cart");
 Route::get("/dashboard", "IndexController@dashboard");
 Route::get("/addproduct", "IndexController@addProduct");
-
+Route::post("/pushaddproduct", "IndexController@pushAddProduct");
 Route::get('/addtocart', 'IndexController@addToCart');

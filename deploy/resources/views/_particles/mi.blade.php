@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<div class="home">
+	<div class="home">
 		<div class="home_container">
 			<div class="home_background" style="background-image:url(site_assets/images/categories.jpg)"></div>
 			<div class="home_content_container">

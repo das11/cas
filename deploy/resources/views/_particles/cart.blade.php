@@ -44,7 +44,7 @@
 		<div class="row cart_items_row">
 			<div class="col">
 
-				@foreach($products as $item)
+				@foreach($errors as $item)
 
 				<!-- Cart Item -->
 				<div class="cart_item d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start">
@@ -135,7 +135,7 @@
 			@php
 
 				$total = 0;
-				foreach ($products as $item) {
+				foreach ($errors as $item) {
 					$total += $item->price;
 				}
 

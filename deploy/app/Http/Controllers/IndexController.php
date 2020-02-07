@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use App\User;
 use App\Products;
 use App\Cart;
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\DB;
 use Intervention\Image\Facades\Image;
 
 use Illuminate\Support\Facades\Input; 
+use Redirect;
 
 
 class IndexController extends Controller
@@ -191,11 +193,37 @@ class IndexController extends Controller
     
     
     public function dashboard(){
+
+        
+
+    
         return view("_particles.dashboard");
 
     }
     
+    public function pushAddProduct(Request $request){
+        $inputs = $request->all();
+        
+        $name = $inputs["name"];
+        $price = $inputs["price"];
+        // $online = $inputs["online"];
+        $description = $inputs["description"];
+        // $availability = $inputs["availability"];
+        $featured_image = $inputs["featured_image"];
 
+        $products = new Products;
+        $products->name = $name;
+        $products->price = $price;
+        // $products->online = $online;
+        $products->description = $description;
+        // $products->availability = $availability;
+        $products->featured_image = $featured_image;
+        $products->save();
+
+        
+        return redirect("/addproduct");
+       
+    }
     
    
 

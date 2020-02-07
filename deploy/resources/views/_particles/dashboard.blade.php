@@ -1,14 +1,37 @@
 @extends('layouts.app')
 @section('content')
 
-<div class="row mt-5" style="padding-top:8%">
+
+<div class="home">
+		<div class="home_container">
+			<div class="home_background" style="background-image:url(site_assets/images/contact.jpg)"></div>
+			<div class="home_content_container">
+				<div class="container">
+					<div class="row">
+						<div class="col">
+							<div class="home_content">
+								<div class="breadcrumbs">
+									<ul>
+										<li><a href="index.html">Home</a></li>
+										<li>Dashboard</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</div>
+
+<div class="row mt-5">
         <div class="col-12 col-lg-3 d-flex justify-content-center">
             <div class="dashsidepanel shadow text-center mb-4">
              
               <ul class="list-group list-group-flush p-3 mt-3 text-left font-weight-bold">
                 
-                <li class="list-group-item active">Add Product</li>
-                <li class="list-group-item">Dashboard</li>
+                <li class="list-group-item"><a href="/addproduct">Add Product</a></li>
+                <li class="list-group-item active">Dashboard</li>
                
                
               </ul>
@@ -18,7 +41,7 @@
             </div>
         </div>
 	
-<div class="col-xs-12 col-md-9 col-lg-9">
+            <div class="col-xs-12 col-md-9 col-lg-9">
                 <div class="row">
                     <div class="col-12 mt-4 mb-4 d-flex justify-content-center">
                         <h1 class="text-dark">All Products</h1>
@@ -40,6 +63,8 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                            
+                                
                                 <tr> 
                                     <th scope="row">1</th>
                                     <td>Samsung S9</td>
@@ -73,9 +98,7 @@
                     </div>
                 </div>
             </div>
-
-
-
+    </div>
 
 
 @endsection

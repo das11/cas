@@ -30,7 +30,7 @@
               <ul class="list-group list-group-flush p-3 mt-3 text-left font-weight-bold">
                 
                 <li class="list-group-item active">Add Product</li>
-                <li class="list-group-item">Dashboard</li>
+                <li class="list-group-item"><a href="/dashboard">Dashboard</a></li>
                
                
               </ul>
@@ -44,25 +44,25 @@
 			<div class="get_in_touch">
 			   
 				<div class="contact_form_container">
-					{!! Form::open(array('url' => 'dashboard','class'=>'','id'=>'signup','role'=>'form')) !!}
+					{!! Form::open(array('url' => 'pushaddproduct','class'=>'','id'=>'signup','role'=>'form')) !!}
 					<form action="#" id="contact_form" class="contact_form">
 						
 						<div>
 							
 							<label for="contact_company">Product Name</label>
-							<input name="name" id="contact_company" placeholder="Product Name" type="text"  class="contact_input" >
+							<input name="name" id="contact_company" placeholder="Product Name" type="text"  class="form-control">
 						</div>
 						<br>
 						<div>
 							
 							<label for="contact_company">Price</label>
-							<input name="price" id="contact_company" placeholder="Price" type="text"  class="contact_input">
+							<input name="price" id="contact_company" placeholder="Price" type="text"  class="form-control">
 						</div>
 						<br>
 						<div>
 							
 							<label for="contact_company">Description</label>
-							<textarea name="description" id="contact_company"  type="text"  class="contact_input" rows="3"></textarea>
+							<textarea name="description" id="contact_company"  type="text"  class="form-control" rows="3"></textarea>
 						</div>
 						<br>
 						<div class="form-group">
@@ -72,7 +72,7 @@
 						<br>
 						<div class="preview_image mb-2">
 							<img id="output_image"/>
-						 </div>
+						</div>
 					   
 						
 						<button type="submit" class="button contact_button"><span>Submit</span></button>
