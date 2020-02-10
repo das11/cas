@@ -140,7 +140,7 @@
 	<div class="avds">
 		<div class="avds_container d-flex flex-lg-row flex-column align-items-start justify-content-between">
 			<div class="avds_small" style="margin-right: 10px" >
-				<div class="avds_background" style="background-image:url(site_assets/images/asus.jpg); width:200; height:150"></div>
+				<div class="avds_background" style="background-image:url(site_assets/images/asus.png); width:200; height:150"></div>
 				<div class="avds_small_inner">
 					<!-- <div class="avds_discount_container">
 						<img src="site_assets/images/discount.png" alt="">
@@ -159,7 +159,7 @@
 			</div>
 			
 			<div class="avds_small" style="margin-right: 10px">
-				<div class="avds_background" style="background-image:url(site_assets/images/hp.jpg)"></div>
+				<div class="avds_background" style="background-image:url(site_assets/images/hp.png)"></div>
 				<div class="avds_small_inner">
 					<!-- <div class="avds_discount_container">
 						<img src="site_assets/images/discount.png" alt="">
@@ -177,7 +177,7 @@
 				</div>
 			</div>
 			<div class="avds_small" >
-				<div class="avds_background" style="background-image:url(site_assets/images/xiaomi.jpg)"></div>
+				<div class="avds_background" style="background-image:url(site_assets/images/xiaomi.png)"></div>
 				<div class="avds_small_inner">
 					<!-- <div class="avds_discount_container">
 						<img src="site_assets/images/discount.png" alt="">
