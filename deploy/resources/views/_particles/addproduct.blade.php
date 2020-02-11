@@ -49,30 +49,58 @@
 						
 						<div>
 							
-							<label for="contact_company">Product Name</label>
+							<label for="contact_company"><b>Product Name</b></label>
 							<input name="name" id="contact_company" placeholder="Product Name" type="text"  class="form-control">
 						</div>
 						<br>
 						<div>
 							
-							<label for="contact_company">Price</label>
+							<label for="contact_company"><b>Price</b></label>
 							<input name="price" id="contact_company" placeholder="Price" type="text"  class="form-control">
 						</div>
 						<br>
 						<div>
 							
-							<label for="contact_company">Description</label>
+							<label for="contact_company"><b>Description</b></label>
 							<textarea name="description" id="contact_company"  type="text"  class="form-control" rows="3"></textarea>
 						</div>
 						<br>
 						<div class="form-group">
-							<label for="contact_compan">Add Featured Image</label>
+							<label for="contact_compan"><b>Add Featured Image</b></label>
 							<input type="file" class="form-control-file" id="exampleFormControlFile1" name="featured_image" onchange="preview_image(event)">
 						</div>
 						<br>
 						<div class="preview_image mb-2">
 							<img id="output_image"/>
 						</div>
+						<br>
+						<div class="form-group row">
+                        	<label for="status" class="col-md-3 col-form-label"><b>Status</b></label>
+                        	<div class="col-md-9">
+                    
+                           		<select name="availability" id="select-status" class="form-control">
+                                	<option value="Available">Available</option>
+                                	<option value="Unavailable">Unavailable</option>
+                        
+                            	</select>
+                        	</div>
+                        
+                   		</div>
+						   <br>
+						<div class="form-group row">
+                        	<label for="status" class="col-md-3 col-form-label"><b>Online Status</b></label>
+                        	<div class="col-md-9">
+                    
+                           		<select name="online" id="select-status" class="form-control">
+                                	<option value="Available">Available</option>
+                                	<option value="Unavailable">Unavailable</option>
+                        
+                            	</select>
+                        	</div>
+                        
+                   		</div>
+						   <br>
+						
 					   
 						
 						<button type="submit" class="button contact_button"><span>Submit</span></button>

@@ -206,17 +206,26 @@ class IndexController extends Controller
         
         $name = $inputs["name"];
         $price = $inputs["price"];
-        // $online = $inputs["online"];
+        $online = $inputs["online"];
         $description = $inputs["description"];
-        // $availability = $inputs["availability"];
+        $availability = $inputs["availability"];
         $featured_image = $inputs["featured_image"];
+        if(strcmp($online,"Available")==0)
+            $online=1;
+        else
+            $online=0;
 
+
+        if(strcmp($availability,"Available")==0)
+            $availability=1;
+        else
+            $availability=0;
         $products = new Products;
         $products->name = $name;
         $products->price = $price;
-        // $products->online = $online;
+        $products->online = $online;
         $products->description = $description;
-        // $products->availability = $availability;
+        $products->availability = $availability;
         $products->featured_image = $featured_image;
         $products->save();
 
