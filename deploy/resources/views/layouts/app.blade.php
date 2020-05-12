@@ -13,6 +13,8 @@
 <link rel="stylesheet" type="text/css" href="{{ URL::asset('site_assets/plugins/OwlCarousel2-2.2.1/animate.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ URL::asset('site_assets/css/main_styles.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ URL::asset('site_assets/css/responsive.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ URL::asset('site_assets/css/checkout.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ URL::asset('site_assets/css/checkout_responsive.css') }}">
 
 
 <!-- LOGIN  -->
@@ -34,9 +36,19 @@
 <!-- CART -->
 <link rel="stylesheet" type="text/css" href="{{ URL::asset('site_assets/css/cart.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ URL::asset('site_assets/css/cart_responsive.css') }}">
+
+<script src="https://cdn.tiny.cloud/1/c462hbdn0raoxxhsx4bpi8ckh1mohixk9z9s654dzohjgjlz/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script type="text/javascript">
+  tinymce.init({
+    selector: '#product_description'
+  });
+</script>
+
 </head>
+
 <body>
-@include("_particles.header")
+  
+  @include("_particles.header")
     @yield('content')
   @include("_particles.footer")
 
@@ -54,10 +66,13 @@
 <script src="{{ URL::asset('site_assets/plugins/easing/easing.js') }}"></script>
 <script src="{{ URL::asset('site_assets/plugins/parallax-js-master/parallax.min.js') }}"></script>
 <script src="{{ URL::asset('site_assets/js/custom.js') }}"></script>
+<script src="{{ URL::asset('site_assets/js/preview.js') }}"></script>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCIwF204lFZg1y4kPSIhKaHEXMLYxxuMhA"></script>
 <script src="{{ URL::asset('site_assets/js/contact.js') }}"></script>
 <script src="{{ URL::asset('site_assets/js/product.js') }}"></script>
 <script src="{{ URL::asset('site_assets/js/categories.js') }}"></script>
 <script src="{{ URL::asset('site_assets/js/cart.js') }}"></script>
+<script src="{{ URL::asset('site_assets/js/checkout.js') }}"></script>
+
 </body>
 </html>

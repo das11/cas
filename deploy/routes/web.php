@@ -34,14 +34,21 @@ Auth::routes();
 Route::get("/", "IndexController@index");
 Route::get("/login", "IndexController@login");
 Route::post("/login", "IndexController@postLogin");
+
 Route::get("/signup", "IndexController@signup");
 Route::post("/signup", "IndexController@post_signup");
+
 Route::get("/products", "IndexController@products");
 Route::get("/hpworlds", "IndexController@hpworlds");
 Route::get("/asus", "IndexController@asus");
 Route::get("/xiaomi", "IndexController@xiaomi");
-Route::get("/cart", "IndexController@cart");
+
 Route::get("/dashboard", "IndexController@dashboard");
 Route::get("/addproduct", "IndexController@addProduct");
 Route::post("/pushaddproduct", "IndexController@pushAddProduct");
+Route::get("/editproduct", "IndexController@editProduct");
+Route::post("/pusheditproduct", "IndexController@pushEditProduct");
+
+Route::get("/cart", "IndexController@cart");
 Route::get('/addtocart', 'IndexController@addToCart');
+Route::get("/checkout", "IndexController@checkout");

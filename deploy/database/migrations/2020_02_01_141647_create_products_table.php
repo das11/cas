@@ -18,7 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('name', 255);
             $table->integer('price');
             $table->boolean('online');
-            $table->string('description', 255);
+            $table->text('description');
             $table->integer('availability');
             $table->string('featured_image',255);
             $table->timestamps();

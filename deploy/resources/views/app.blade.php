@@ -49,6 +49,7 @@
 <script src="{{ URL::asset('site_assets/plugins/easing/easing.js') }}"></script>
 <script src="{{ URL::asset('site_assets/plugins/parallax-js-master/parallax.min.js') }}"></script>
 <script src="{{ URL::asset('site_assets/js/custom.js') }}"></script>
+<script src="{{ URL::asset('site_assets/js/preview.js') }}"></script>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCIwF204lFZg1y4kPSIhKaHEXMLYxxuMhA"></script>
 <!-- <script src="{{ URL::asset('site_assets/js/contact.js') }}"></script>
 <script src="{{ URL::asset('site_assets/js/product.js') }}"></script>

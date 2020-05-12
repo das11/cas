@@ -44,17 +44,17 @@
 		<div class="row cart_items_row">
 			<div class="col">
 
-				@foreach($errors as $item)
+				@foreach($products as $item)
 
 				<!-- Cart Item -->
 				<div class="cart_item d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start">
 					<!-- Name -->
 					<div class="cart_item_product d-flex flex-row align-items-center justify-content-start">
 						<div class="cart_item_image">
-							<div><img src="images/cart_1.jpg" alt=""></div>
+							<div><img src="{{ URL::asset('upload/featured_image/'.$item->featured_image.'-b.jpg') }}" height="150" alt=""></div>
 						</div>
 						<div class="cart_item_name_container">
-						<div class="cart_item_name"><a href="#">{{ $item->name }}</a></div>
+						<div class="cart_item_name"><h4 style="color: black;">{{ $item->name }}</h4></div>
 							{{-- <div class="cart_item_edit"><a href="#">Edit Product</a></div> --}}
 						</div>
 					</div>
@@ -109,7 +109,7 @@
 						<label class="delivery_option clearfix">Standard delivery
 							<input type="radio" name="radio">
 							<span class="checkmark"></span>
-							<span class="delivery_price">₹ 99</span>
+							<span class="delivery_price">Free</span>
 						</label>
 						<label class="delivery_option clearfix">Personal pickup
 							<input type="radio" checked="checked" name="radio">
@@ -135,7 +135,7 @@
 			@php
 
 				$total = 0;
-				foreach ($errors as $item) {
+				foreach ($products as $item) {
 					$total += $item->price;
 				}
 
@@ -161,10 +161,12 @@
 							</li>
 						</ul>
 					</div>
-					<div class="button checkout_button"><a href="#">Proceed to checkout</a></div>
+					<div class="button checkout_button"><a href="/checkout?cart_id={{ $cart->id }}">Proceed to checkout</a></div>
 				</div>
 			</div>
 		</div>
 	</div>		
 </div>
-    @endsection
+	
+
+@endsection

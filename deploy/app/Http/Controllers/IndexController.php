@@ -161,10 +161,23 @@ class IndexController extends Controller
 
                 /**
                  * If cart exists, just append product to cart
+                 * After checking if product id already exists in that cart
                  */
 
-                $cart->product_ids .= "," . $id;
-                $cart->save();
+                $product_ids = $cart->product_ids;
+                $id_str = "," . $id;
+
+                // print_r("str : " . $product_ids);
+                // print_r("id : " . $id_str);
+
+                if(strpos($product_ids, $id_str) !== false){
+
+                    // print_r("\nexists");
+                }else{
+                    $cart->product_ids .= "," . $id;
+                    $cart->save();
+                    // print_r("\ndoesnt exist");
+                }
 
             }
 
@@ -180,28 +193,40 @@ class IndexController extends Controller
             $products = Products::where("cart_id", $cart_id)->get();
             
 
-            return view("_particles.cart", compact("products"));
+            // print_r(count($products));
+            return view("_particles.cart", compact("products", "cart"));
         }
- 
-        
+     
+    }
+
+
+    public function checkout(Request $request){
+
+        $cart_id = $request->cart_id;
+
+        $products = Products::where("cart_id", $cart_id)->get();
+        return view("_particles.checkout", compact("products"));
+    }
+
+
+    public function dashboard(){
+
+        $products = new Products;
+        $products = Products::all();
+
+    
+        return view("_particles.dashboard", compact('products'));
+
     }
     
     public function addProduct(){
+
         return view("_particles.addproduct");
-
-    }
-    
-    
-    public function dashboard(){
-
-        
-
-    
-        return view("_particles.dashboard");
-
     }
     
     public function pushAddProduct(Request $request){
+
+
         $inputs = $request->all();
         
         $name = $inputs["name"];
@@ -215,23 +240,117 @@ class IndexController extends Controller
         else
             $online=0;
 
-
         if(strcmp($availability,"Available")==0)
             $availability=1;
         else
             $availability=0;
+
         $products = new Products;
         $products->name = $name;
         $products->price = $price;
         $products->online = $online;
         $products->description = $description;
         $products->availability = $availability;
-        $products->featured_image = $featured_image;
+
+
+        $featured_image = $request->file("featured_image");
+        $image_slug = str_slug($inputs['name'], "-");
+
+        // dd($request->file("featured_image"));
+        // print_r("slug : " .$image_slug);
+
+        if($featured_image){
+
+            $hardPath = 'upload/featured_image/';
+            $tempPath = substr($image_slug,0,100).'_'.time();
+        
+            // print_r("path : " . $hardPath.$tempPath);
+            $img = Image::make($featured_image);
+            $img->save($hardPath.$tempPath.'-b.jpg');
+            $img->fit(300, 300)->save($hardPath.$tempPath. '-s.jpg');
+
+            $products->featured_image = $tempPath;
+             
+
+        }
+
+
         $products->save();
 
         
-        return redirect("/addproduct");
+        return redirect("/dashboard");
        
+    }
+
+    public function editProduct(Request $request){
+
+        $id = $request->id;
+
+        $product = new Products;
+        $product = Products::where("id", $id)->first();
+
+        return view("_particles.editproduct", compact("product"));
+
+    }
+
+    public function pushEditProduct(Request $request){
+
+
+        $inputs = $request->all();
+        
+        $id = $inputs["productid"];
+        $name = $inputs["name"];
+        $price = $inputs["price"];
+        $online = $inputs["online"];
+        $description = $inputs["description"];
+        $availability = $inputs["availability"];
+        $featured_image = $inputs["featured_image"];
+        if(strcmp($online,"Available")==0)
+            $online=1;
+        else
+            $online=0;
+
+        if(strcmp($availability,"Available")==0)
+            $availability=1;
+        else
+            $availability=0;
+
+        $products = Products::where("id", $id)->first();
+        $products->name = $name;
+        $products->price = $price;
+        $products->online = $online;
+        $products->description = $description;
+        $products->availability = $availability;
+
+
+        $featured_image = $request->file("featured_image");
+        $image_slug = str_slug($inputs['name'], "-");
+
+        // dd($request->file("featured_image"));
+        // print_r("slug : " .$image_slug);
+
+        if($featured_image){
+
+            $hardPath = 'upload/featured_image/';
+            $tempPath = substr($image_slug,0,100).'_'.time();
+        
+            // print_r("path : " . $hardPath.$tempPath);
+            $img = Image::make($featured_image);
+            $img->save($hardPath.$tempPath.'-b.jpg');
+            $img->fit(300, 300)->save($hardPath.$tempPath. '-s.jpg');
+
+            $products->featured_image = $tempPath;
+             
+
+        }
+
+
+        $products->save();
+
+        
+        return redirect("/dashboard");
+
+
     }
     
    

@@ -14,8 +14,7 @@ class ModifyProducts extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->integer("cart_id");
-
+            $table->string("type", 255)->nullable();
         });
     }
 
