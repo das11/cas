@@ -31,8 +31,9 @@
 					
 					<ul class="list-group list-group-flush p-3 mt-3 text-left font-weight-bold">
 						
-						<li class="list-group-item active">Add Product</li>
-						<li class="list-group-item"><a href="/dashboard">Dashboard</a></li>
+					<li class="list-group-item active"><a href="/addproduct" style="color:white">Add Product</a></li>
+                    <li class="list-group-item"><a href="/dashboard">Dashboard</a></li>
+                    <li class="list-group-item"><a href="/addcategories">Add Category</a></li>
 					
 					
 					</ul>
@@ -74,6 +75,9 @@
 									<label for="contact_compan"><b>Add Featured Image</b></label>
 									<br><br>
 									<input type="file" class="form-control-file" id="exampleFormControlFile1" name="featured_image" onchange="preview_image(event)">
+									<div class="preview_image mb-2">
+										<img id="output_image" style="max-height : 200px"/>
+									</div>
 									
 									@if ($product->featured_image != "0")
 										<img src="{{ URL::asset('upload/featured_image/'.$product->featured_image.'-b.jpg') }}" height="100" width="100" alt="featured_image" class="img-fluid">
@@ -86,16 +90,27 @@
 							
 										<select name="availability" id="select-status" class="form-control">
 											<option value="select">Select</option>
-											<option value="mobile">Mobile</option>
-											<option value="tv">TVs</option>
-											<option value="ac">Air-conditioner</option>
-											<option value="printer">Printers</option>
+											@foreach ($categories as $category)
+												<option value="{{$category->category_name}}">{{$category->category_name}}</option>	
+											@endforeach
 								
 										</select>
 									</div>
-								
 								</div>
-							<input name="productid" value="{{ $product->id }}" hidden>
+
+								<div class="form-group row">
+									<label for="status" class="col-md-3 col-form-label"><b>Exclusive Store</b></label>
+									<div class="col-md-9">
+							
+										<select name="store" id="select-status" class="form-control">
+											<option value="0">Select</option>
+											<option value="asus_store">Asus</option>
+											<option value="mi_store">Mi</option>
+											<option value="hp_store">HP World</option>
+										</select>
+									</div>
+								</div>
+							
 								<div class="form-group row">
 									<label for="status" class="col-md-3 col-form-label"><b>Status</b></label>
 									<div class="col-md-9">
@@ -120,7 +135,7 @@
 								</div>
 								<br>
 								
-							
+								<input name="productid" value="{{ $product->id }}" hidden>
 								
 								<button type="submit" class="button contact_button"><span>Submit</span></button>
 							

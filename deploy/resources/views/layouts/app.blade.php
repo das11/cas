@@ -18,10 +18,10 @@
 
 
 <!-- LOGIN  -->
-<link href="{{ URL::asset('site_assets/plugins/font-awesome-4.7.0/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css"> -->
+<link href="{{ URL::asset('site_assets/plugins/font-awesome-4.7.0/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" href="{{ URL::asset('site_assets/css/contact.css') }}">
 
-<<link rel="stylesheet" type="text/css" href="{{ URL::asset('site_assets/css/contact_responsive.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ URL::asset('site_assets/css/contact_responsive.css') }}">
 
  <!-- PRODUCT -->
 

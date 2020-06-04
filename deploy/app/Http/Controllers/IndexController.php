@@ -7,11 +7,14 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Products;
 use App\Cart;
+use App\ProductGallery;
+use App\Categories;
 use Auth;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Intervention\Image\Facades\Image;
+use Session;
 
 use Illuminate\Support\Facades\Input; 
 use Redirect;
@@ -23,8 +26,26 @@ class IndexController extends Controller
 
         $products = new Products;
         $products = Products::all();
-        
-        return view("_particles.index",  compact('products'));
+
+        if(Auth::check()){
+
+            $user_id = Auth::user()->id;
+            $cart_id = $user_id;
+
+            $cart = Cart::where("id", $cart_id)->first();
+            $products_str = $cart->product_ids;
+
+            $cart_count = substr_count($products_str, ",");
+
+            Session::put('cart_count', $cart_count);
+
+            return view("_particles.index", compact('products', 'cart_count'));
+
+        }else{
+
+            return view("_particles.index",  compact('products'));
+        }
+
     }
 
     public function login(){
@@ -114,6 +135,14 @@ class IndexController extends Controller
         return view("_particles.products");
     }
 
+    public function product(Request $request){
+
+        $id = $request->id;
+        $product = Products::where("id", $id)->first();
+
+        return view("_particles.single-product", compact("product"));
+    }
+
     public function hpworlds(){
         return view("_particles.hp");
 
@@ -128,7 +157,22 @@ class IndexController extends Controller
     }
     
     public function cart(){
-        return view("_particles.cart");
+
+        if(Auth::check()){
+
+            $user_id = Auth::user()->id;
+            $cart_id = $user_id;
+
+            $cart = Cart::where("id", $cart_id)->first();
+
+            $product_ids = explode(",", $cart->product_ids);
+            array_shift($product_ids);
+
+            $products = Products::whereIn("id", $product_ids)->get();
+
+        }
+
+        return view("_particles.cart", compact("products", "cart"));
 
     }
 
@@ -190,7 +234,10 @@ class IndexController extends Controller
             /**
              * Fetch all products in the cart
              */
-            $products = Products::where("cart_id", $cart_id)->get();
+            $product_ids = explode(",", $cart->product_ids);
+            array_shift($product_ids);
+
+            $products = Products::whereIn("id", $product_ids)->get();
             
 
             // print_r(count($products));
@@ -218,10 +265,32 @@ class IndexController extends Controller
         return view("_particles.dashboard", compact('products'));
 
     }
+
+    public function addCategories(){
+
+        $categories = Categories::all();
+        return view("_particles.addcategories", compact("categories"));
+    }
+
+    public function pushAddCategories(Request $request){
+
+
+        $name = $request->has("name") ? $request->name : "0";
+        $slug = $request->has("slug") ? $request->slug : "as";
+
+        $category = new Categories;
+        $category->category_name = $name;
+        $category->category_slug = $slug;
+        $category->status = 1;
+        $category->save();
+
+        return redirect("/addcategories");
+    }
     
     public function addProduct(){
 
-        return view("_particles.addproduct");
+        $categories = Categories::all();
+        return view("_particles.addproduct", compact("categories"));
     }
     
     public function pushAddProduct(Request $request){
@@ -234,7 +303,8 @@ class IndexController extends Controller
         $online = $inputs["online"];
         $description = $inputs["description"];
         $availability = $inputs["availability"];
-        $featured_image = $inputs["featured_image"];
+        $store = $inputs["store"];
+
         if(strcmp($online,"Available")==0)
             $online=1;
         else
@@ -253,13 +323,16 @@ class IndexController extends Controller
         $products->availability = $availability;
 
 
-        $featured_image = $request->file("featured_image");
-        $image_slug = str_slug($inputs['name'], "-");
+       
 
         // dd($request->file("featured_image"));
         // print_r("slug : " .$image_slug);
 
-        if($featured_image){
+        
+        if($request->has("featured_image")){
+
+            $featured_image = $request->file("featured_image");
+            $image_slug = str_slug($inputs['name'], "-");
 
             $hardPath = 'upload/featured_image/';
             $tempPath = substr($image_slug,0,100).'_'.time();
@@ -274,8 +347,42 @@ class IndexController extends Controller
 
         }
 
+        if($store != "0"){
+            $products->$store = true;
+        }
 
         $products->save();
+        $product_id = $products->id;
+
+        /**
+         * Fetch and Push images for Gallery
+         */
+        
+        $product_gallery_files = $request->file('gallery_file');
+        $file_count = count($product_gallery_files);
+         
+        if($request->hasFile('gallery_file'))
+        {
+            $image_slug = str_slug($inputs['name'], "-");
+            foreach($product_gallery_files as $file) {
+                
+                $product_gallery = new ProductGallery;
+
+                $hardPath = 'upload/gallery/';            
+                $tempPath = substr($image_slug,0,100).'_'.rand(0,9999).'-b.jpg';
+                
+                $product_img = Image::make($file);
+                $product_img->save($hardPath.$tempPath);
+                
+
+                $product_gallery->product_id = $product_id;
+                $product_gallery->image_name = $tempPath;
+                $product_gallery->save();
+                    
+            }
+        }
+
+        
 
         
         return redirect("/dashboard");
@@ -289,7 +396,9 @@ class IndexController extends Controller
         $product = new Products;
         $product = Products::where("id", $id)->first();
 
-        return view("_particles.editproduct", compact("product"));
+        $categories = Categories::all();
+
+        return view("_particles.editproduct", compact("product", "categories"));
 
     }
 
@@ -304,7 +413,8 @@ class IndexController extends Controller
         $online = $inputs["online"];
         $description = $inputs["description"];
         $availability = $inputs["availability"];
-        $featured_image = $inputs["featured_image"];
+        $store = $inputs["store"];
+
         if(strcmp($online,"Available")==0)
             $online=1;
         else
@@ -322,14 +432,13 @@ class IndexController extends Controller
         $products->description = $description;
         $products->availability = $availability;
 
-
-        $featured_image = $request->file("featured_image");
-        $image_slug = str_slug($inputs['name'], "-");
-
         // dd($request->file("featured_image"));
         // print_r("slug : " .$image_slug);
 
-        if($featured_image){
+        if($request->has("featured_image")){
+
+            $featured_image = $request->file("featured_image");
+            $image_slug = str_slug($inputs['name'], "-");
 
             $hardPath = 'upload/featured_image/';
             $tempPath = substr($image_slug,0,100).'_'.time();
@@ -342,6 +451,10 @@ class IndexController extends Controller
             $products->featured_image = $tempPath;
              
 
+        }
+
+        if($store != "0"){
+            $products->$store = true;
         }
 
 

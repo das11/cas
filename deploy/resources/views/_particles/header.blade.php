@@ -23,23 +23,16 @@
 										</ul>
 									</li>
 									<li class="hassubs">
-										<a href="#">Stores</a>
+										<a href="#">Categories</a>
 										<ul>
-												<li><a href="categories.html">HP World</a></li>
-												<li><a href="categories.html">Xiaomi Exclusive Store</a></li>
-												<li><a href="categories.html">Mulit Brand Store - CAS</a></li>
+												<li><a href="/">CAS Computers</a></li>
+												<li><a href="categories.html">CAS Gaming</a></li>
+												<li><a href="categories.html">CAS Refurbished</a></li>
+												<li><a href="/xiaomi">Xiaomi Exclusive Store</a></li>
+												<li><a href="/asus">ASUS Exclusive Store</a></li>
 										</ul>
 									</li>
-									<li class="hassubs">
-										<a href="categories.html">Categories</a>
-										<ul>
-											<li><a href="categories.html">Category</a></li>
-											<li><a href="categories.html">Category</a></li>
-											<li><a href="categories.html">Category</a></li>
-											<li><a href="categories.html">Category</a></li>
-											<li><a href="categories.html">Category</a></li>
-										</ul>
-									</li>
+									<li><a href="#">About</a></li>
 									<li><a href="#">Offers</a></li>
 									<li><a href="contact.html">Contact</a></li>
 								</ul>
@@ -59,7 +52,16 @@
 												</g>
 											</svg>
 											<div>
-												Cart <span>(0)</span>
+												@if (Session::has("cart_count"))
+													Cart <span>({{ Session::get("cart_count") }})</span>	
+												@else
+													Cart <span>(0)</span>
+												@endif
+												{{-- @if(isset($cart_count))
+													Cart <span>({{ $cart_count }})</span>	
+												@else
+													Cart <span>(0)</span>
+												@endif --}}
 											</div>
 										</a>
 									</div>

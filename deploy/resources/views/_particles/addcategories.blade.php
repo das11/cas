@@ -13,7 +13,7 @@
 								<div class="breadcrumbs">
 									<ul>
 										<li><a href="index.html">Home</a></li>
-										<li>Dashboard</li>
+										<li>Categories</li>
 									</ul>
 								</div>
 							</div>
@@ -36,8 +36,8 @@
                   <ul class="list-group list-group-flush p-3 mt-3 text-left font-weight-bold">
                     
                     <li class="list-group-item"><a href="/addproduct">Add Product</a></li>
-                    <li class="list-group-item active"><a href="/dashboard" style="color:white">Dashboard</a></li>
-                    <li class="list-group-item"><a href="/addcategories">Add Category</a></li>
+                    <li class="list-group-item"><a href="/dashboard">Dashboard</a></li>
+                    <li class="list-group-item active"><a href="/addcategories" style="color:white">Add Category</a></li>
                    
                    
                   </ul>
@@ -51,7 +51,7 @@
             <div class="col-xs-12 col-md-9 col-lg-9">
                 <div class="row">
                     <div class="col-12 mt-4 mb-4 d-flex justify-content-center">
-                        <h1 class="avds_title" style="color : black">All Products</h1>
+                        <h1 class="avds_title" style="color : black">Categories</h1>
                     </div>
                 </div>
                 <div class="row">
@@ -63,9 +63,8 @@
                                     <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Name</th>
-                                    <th scope="col">View</th>
+                                    <th scope="col">Slug</th>
                                     <th scope="col">Status</th>
-                                    <th scope="col">Online</th>
                                     <th scope="col">Action</th>
                                     </tr>
                                 </thead>
@@ -74,41 +73,52 @@
                                         $c = 1;   
                                     @endphp
 
-                                    @foreach ($products as $product)
+                                    @foreach ($categories as $category)
                                     <tr>
                                     <th scope="row">{{ $c }}</th>
-                                        <td>{{$product->name}}</td>
+                                        <td>{{ $category->category_name }}</td>
                                         <td>
-                                        <a href="/editproduct?id={{$product->id}}"><button type="button" class="btn btn-info btn-sm"> Open</button></a>
+                                            {{ $category->category_slug }}
                                         </td>
                                         <td>
-                                            @if ($product->availability == 1)
-                                                <span class="badge badge-success">Published</span>
-                                            @else
-                                            <span class="badge badge-danger">Not Published</span>
-                                            @endif
+                                                @if ($category->status == 1)
+                                                    <span class="badge badge-success">Active</span>
+                                                @else
+                                                    <span class="badge badge-info">Inactive</span>
+                                                @endif
                                         </td>
                                         <td>
-                                            @if ($product->online == 1)
-                                                <span class="badge badge-success">Available</span>
-                                            @else
-                                            <span class="badge badge-danger">Not Available</span>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            
                                             <button type="button" class="btn btn-danger btn-sm">Delete</button>   
                                         </td>
                                     </tr>
-
                                     @php
                                         $c = $c + 1
                                     @endphp
-
                                     @endforeach
                                 </tbody>
                                 
-                            </table>       
+                            </table>  
+
+                            <hr>
+
+                            {!! Form::open(array('url' => 'pushaddcategory','class'=>'','id'=>'signup','role'=>'form', 'enctype' => 'multipart/form-data')) !!}
+							<form action="#" id="contact_form" class="contact_form">
+
+                                <div class="form-group row">
+									
+                                    <input name="name" id="contact_company" placeholder="New Category Name" type="text"  class="form-control col-md-5">
+
+                                    &nbsp;
+
+                                    <input name="slug" id="contact_company" placeholder="Category Slug" type="text"  class="form-control col-md-4">
+
+                                    <a href="" class="col-md-2">     
+                                        <button type="button | submit" class="btn btn-success btn-sm"><i class="fa fa-plus"></i> Add New</button>   
+                                    </a>
+
+								</div>
+
+							</form>
                         </div>
 
                     </div>
