@@ -9,9 +9,9 @@
 				<div class="row">
 					<div class="col">
 						<div class="header_content d-flex flex-row align-items-center justify-content-start">
-							<div class="logo"><a href="#">CAS Computers.</a></div>
+							<div class="logo"><a href="/">CAS Computers.</a></div>
 							<nav class="main_nav">
-								<ul>
+								{{-- <ul>
 									<li class="hassubs active">
 										<a href="index.html">Home</a>
 										<ul>
@@ -25,7 +25,24 @@
 									<li class="hassubs">
 										<a href="#">Categories</a>
 										<ul>
-												<li><a href="/">CAS Computers</a></li>
+												<li><a href="categories.html">CAS Gaming</a></li>
+												<li><a href="categories.html">CAS Refurbished</a></li>
+												<li><a href="/xiaomi">Xiaomi Exclusive Store</a></li>
+												<li><a href="/asus">ASUS Exclusive Store</a></li>
+												<li class="hassubs2">
+													<a href="#">CAS Computers</a>
+													<ul>
+															<li><a href="categories.html">CAS Gaming</a></li>
+															<li><a href="categories.html">CAS Refurbished</a></li>
+															<li><a href="/xiaomi">Xiaomi Exclusive Store</a></li>
+															<li><a href="/asus">ASUS Exclusive Store</a></li>
+													</ul>
+												</li>
+										</ul>
+									</li>
+									<li class="hassubs">
+										<a href="#">CAS Computers</a>
+										<ul>
 												<li><a href="categories.html">CAS Gaming</a></li>
 												<li><a href="categories.html">CAS Refurbished</a></li>
 												<li><a href="/xiaomi">Xiaomi Exclusive Store</a></li>
@@ -33,14 +50,66 @@
 										</ul>
 									</li>
 									<li><a href="#">About</a></li>
-									<li><a href="#">Offers</a></li>
 									<li><a href="contact.html">Contact</a></li>
+								</ul> --}}
+
+
+								<ul id="menu">
+									<li class="parent"><a href="/">Home</a></li>
+									<li class="parent"><a href="#">Categories</a>
+										<ul class="child">
+											<li class="parent"><a href="#">CAS Gaming <span class="expand">»</span></a>
+												<ul class="child">
+													<li><a href="/products?category=Gaming Laptops">Gaming Laptops</a></li>
+													<li><a href="/products?category=Gaming Monitors">Gaming Monitors</a></li>
+													<li><a href="/products?category=Gaming Desktops">Gaming Desktops</a></li>
+													<li><a href="/products?category=In Game Currency">In Game Currency</a></li>
+													<li><a href="/products?category=Gaming Accessories">Gaming Accessories</a></li>
+													<li><a href="">Build A PC</a></li>
+												</ul>
+											</li>
+											<li><a href="categories.html">CAS Refurbished</a></li>
+											<li class="parent"><a href="/xiaomi">Xiaomi Exclusive Store  <span class="expand">»</span></a>
+												<ul class="child">
+													<li><a href="/products?category=Mobile Phones">Mobile phones</a></li>
+													<li><a href="/products?category=TV">TV</a></li>
+													<li><a href="/products?category=Audio">Audio</a></li>
+													<li><a href="/products?category=Lifestyle">Lifestyle</a></li>
+													<li><a href="/products?category=Home">Home</a></li>
+													<li><a href="/products?category=Accessories">Accessories</a></li>
+												</ul>
+											</li>
+											<li class="parent"><a href="/asus">ASUS Exclusive Store <span class="expand">»</span></a>
+												<ul class="child">
+													<li><a href="/products?category=Laptops">Laptops</a></li>
+													<li><a href="/products?category=Notebook">Notebook</a></li>
+													<li><a href="/products?category=All in One">All in One</a></li>
+													<li><a href="/products?category=Accessories">Accessories</a></li>
+												</ul>
+											</li>
+										</ul>
+									</li>
+									<li class="parent"><a href="">CAS Computers</a>
+										<ul class="child">			
+											<li><a href="/products?category=Laptops">Laptops</a></li>
+											<li><a href="/products?category=Phones">Phones</a></li>
+											<li><a href="/products?category=Desktop">Desktop</a></li>
+											<li><a href="/products?category=Displays">Displays</a></li>
+											<li><a href="/products?category=Sounds">Sounds</a></li>
+											<li><a href="/products?category=Storage Devices">Storage Devices</a></li>
+											<li><a href="/products?category=Printers and Scanners">Printers and scanners</a></li>
+											<li><a href="/products?category=Peripherals">Peripherals</a></li>
+											<li><a href="">Build A PC</a></li>
+										</ul>
+									</li>
+									<li style="margin-top: 3px"><a href="/">Contact</a></li>
 								</ul>
+									
 							</nav>
 							<div class="header_extra ml-auto">
 								@if(Auth::check())
 									<div class="shopping_cart">
-										<a href="cart.html">
+										<a href="/cart">
 											<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 													viewBox="0 0 489 489" style="enable-background:new 0 0 489 489;" xml:space="preserve">
 												<g>
@@ -109,9 +178,11 @@
 				<div class="row">
 					<div class="col">
 						<div class="search_panel_content d-flex flex-row align-items-center justify-content-end">
+							{!! Form::open(array('url' => '/search','class'=>'','id'=>'signup','role'=>'form', 'enctype' => 'multipart/form-data')) !!}
 							<form action="#">
-								<input type="text" class="search_input" placeholder="Search" required="required">
+								<input type="text | submit" name="key" class="search_input" placeholder="Search" required="required">
 							</form>
+							{!! Form::close() !!} 
 						</div>
 					</div>
 				</div>

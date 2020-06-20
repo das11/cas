@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOrdersTable extends Migration
+class AddTagsToProducts extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateOrdersTable extends Migration
      */
     public function up()
     {
-        Schema::create('orders', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->integer('product_id');
-            $table->string('user_id', 255);
-            $table->timestamps();
+        Schema::table('products', function (Blueprint $table) {
+            $table->string('tags')->nullable();
         });
     }
 
@@ -28,6 +25,8 @@ class CreateOrdersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('orders');
+        Schema::table('products', function (Blueprint $table) {
+            //
+        });
     }
 }

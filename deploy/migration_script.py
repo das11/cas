@@ -5,7 +5,7 @@ import time
 start_time = time.time()
 
 # Open the workbook and define the worksheet
-book = xlrd.open_workbook("../mimobile.xls")
+book = xlrd.open_workbook("all.xlsx")
 sheet = book.sheet_by_index(0)
 
 # Establish a MySQL connection
@@ -33,11 +33,13 @@ def view_all_data() :
 def inflate_data() :
 
     num_cols = sheet.ncols
-    for row_idx in range(13, 63):
+    for row_idx in range(13, 3082):
         for col_idx in range(0, num_cols-1):
 
-            print("[%d][%d] : " %(row_idx, col_idx) + sheet.cell(row_idx, col_idx).value)
+            # print("[%d][%d] : " %(row_idx, col_idx) + sheet.cell(row_idx, col_idx).value)
             val = sheet.cell(row_idx, col_idx).value
+            if val == "TSK":
+                continue
             values = (val)
             cursor.execute(query, values)
 
@@ -46,6 +48,7 @@ def inflate_data() :
 def main() :
 
     inflate_data()
+    # view_all_data()
 
     # Close the cursor
     cursor.close()

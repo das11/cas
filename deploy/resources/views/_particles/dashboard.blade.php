@@ -38,6 +38,8 @@
                     <li class="list-group-item"><a href="/addproduct">Add Product</a></li>
                     <li class="list-group-item active"><a href="/dashboard" style="color:white">Dashboard</a></li>
                     <li class="list-group-item"><a href="/addcategories">Add Category</a></li>
+                    <li class="list-group-item"><a href="/addtags">Add Tags</a></li>
+                    <li class="list-group-item"><a href="/orders">Orders</a></li>
                    
                    
                   </ul>
@@ -71,7 +73,7 @@
                                 </thead>
                                 <tbody>
                                     @php
-                                        $c = 1;   
+                                        $c = ($products->perPage() * ($products->currentPage() - 1)) + 1;   
                                     @endphp
 
                                     @foreach ($products as $product)
@@ -107,8 +109,11 @@
 
                                     @endforeach
                                 </tbody>
-                                
-                            </table>       
+                            </table>    
+                            
+                            {{ $products->links() }} 
+
+                            
                         </div>
 
                     </div>

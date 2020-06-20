@@ -9,6 +9,8 @@ use App\Products;
 use App\Cart;
 use App\ProductGallery;
 use App\Categories;
+use App\ProductTag;
+use App\Order;
 use Auth;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -33,6 +35,12 @@ class IndexController extends Controller
             $cart_id = $user_id;
 
             $cart = Cart::where("id", $cart_id)->first();
+            if(!$cart){
+                $cart = new Cart;
+                $cart->id = $cart_id;
+                $cart->user_id = $user_id;
+                $cart->save();
+            }
             $products_str = $cart->product_ids;
 
             $cart_count = substr_count($products_str, ",");
@@ -51,7 +59,6 @@ class IndexController extends Controller
     public function login(){
         if(Auth::check())
         { 
-
             return redirect('/');
         }
         else
@@ -131,8 +138,12 @@ class IndexController extends Controller
     }
 
 
-    public function products(){
-        return view("_particles.products");
+    public function products(Request $request){
+
+        $category = $request->category;
+        $products = Products::where("category", "LIKE", $category )->get();
+
+        return view("_particles.products", compact("products", "category"));
     }
 
     public function product(Request $request){
@@ -140,20 +151,45 @@ class IndexController extends Controller
         $id = $request->id;
         $product = Products::where("id", $id)->first();
 
-        return view("_particles.single-product", compact("product"));
+        $product_gallery_images = ProductGallery::where("product_id", $product->id)->orderBy("image_name")->get();
+
+        return view("_particles.single-product", compact("product", "product_gallery_images"));
+    }
+
+    public function search(Request $request){
+
+        $key = $request->key;
+        $category = ucfirst($key);
+
+        $products = Products::where("category", "LIKE", "%" . $key . "%")
+                            ->orWhere("tags", "LIKE", "%" . $key . "%")
+                            ->orWhere("name", "LIKE", "%" . $key . "%")
+                            ->get();
+
+
+        return view("_particles.products", compact("products", "category"));
     }
 
     public function hpworlds(){
+
+        $products = Products::where("hp_store", 1)->get();
+
         return view("_particles.hp");
 
     }
 
     public function asus(){
+
+        $products = Products::where("asus_store", 1)->get();
+        
         return view("_particles.asus");
     }
 
     public function xiaomi(){
-        return view("_particles.mi");
+
+        $products = Products::where("mi_store", 1)->get();
+
+        return view("_particles.mi", compact("products"));
     }
     
     public function cart(){
@@ -247,19 +283,63 @@ class IndexController extends Controller
     }
 
 
-    public function checkout(Request $request){
+    public function precheckout(Request $request){
 
         $cart_id = $request->cart_id;
 
         $products = Products::where("cart_id", $cart_id)->get();
-        return view("_particles.checkout", compact("products"));
+        return view("_particles.precheckout", compact("products", "cart_id"));
     }
 
+    public function checkout(Request $request){
+
+        // dd($request);
+        $cart_id = $request->cart_id;
+        $cart = Cart::where("id", $cart_id)->first();
+
+        $name = $request->name;
+        $contact = $request->contact;
+        $address = $request->address;
+        $zip = $request->zip;
+        $city = $request->checkout_city;
+        $order_id = "cas_" . substr(md5(microtime()),rand(0,26),4);
+        $product_ids = $cart->product_ids;
+
+        $order = new Order;
+        $order->id = $order_id;
+        $order->product_ids = $product_ids;
+        $order->name = $name;
+        $order->contact = $contact;
+        $order->address = $address;
+        $order->zip = $zip;
+        $order->city = $city;
+
+        $order->save();
+        $order_details = Order::where("id", $order_id)->first();
+
+        $products = Products::where("cart_id", $cart_id)->get();        
+
+        return view("_particles.checkout", compact("products", "cart_id", "order_id", "order_details"));
+    }
+
+    public function payment_success(Request $request){
+
+        // dd($request);
+
+        $order_id = $request->order_id;
+        $payment_id = $request->razorpay_payment_id;
+
+        $order = Order::where("id", $order_id)->first();
+        $order->payment_id = $payment_id;
+        $order->status = 1;
+        $order->save();
+
+    }
 
     public function dashboard(){
 
         $products = new Products;
-        $products = Products::all();
+        $products = Products::paginate(50);
 
     
         return view("_particles.dashboard", compact('products'));
@@ -286,11 +366,33 @@ class IndexController extends Controller
 
         return redirect("/addcategories");
     }
+
+    public function addTags(){
+
+        $tags = ProductTag::all();
+        return view("_particles.addtags", compact("tags"));
+    }
+
+    public function pushAddTags(Request $request){
+
+        $name = $request->has("name") ? $request->name : "0";
+        $slug = $request->has("slug") ? $request->slug : "as";
+
+        $tag = new ProductTag;
+        $tag->tag_name = $name;
+        $tag->tag_slug = $slug;
+        $tag->status = 1;
+        $tag->save();
+
+        return redirect("/addtags");
+    }
     
     public function addProduct(){
 
         $categories = Categories::all();
-        return view("_particles.addproduct", compact("categories"));
+        $tags = ProductTag::all();
+
+        return view("_particles.addproduct", compact("categories", "tags"));
     }
     
     public function pushAddProduct(Request $request){
@@ -304,6 +406,8 @@ class IndexController extends Controller
         $description = $inputs["description"];
         $availability = $inputs["availability"];
         $store = $inputs["store"];
+        $category = $inputs["category"];
+        $tag = $inputs["tag"];
 
         if(strcmp($online,"Available")==0)
             $online=1;
@@ -321,7 +425,8 @@ class IndexController extends Controller
         $products->online = $online;
         $products->description = $description;
         $products->availability = $availability;
-
+        $products->category = $category;
+        $tag = implode(",",$inputs["tag"]);
 
        
 
@@ -397,8 +502,12 @@ class IndexController extends Controller
         $product = Products::where("id", $id)->first();
 
         $categories = Categories::all();
+        $tags = ProductTag::all();
+        $selectedTags = $product->tags;
 
-        return view("_particles.editproduct", compact("product", "categories"));
+        $product_gallery_images = ProductGallery::where("product_id", $product->id)->orderBy("image_name")->get();
+
+        return view("_particles.editproduct", compact("product", "categories", "tags", "selectedTags", "product_gallery_images"));
 
     }
 
@@ -414,6 +523,10 @@ class IndexController extends Controller
         $description = $inputs["description"];
         $availability = $inputs["availability"];
         $store = $inputs["store"];
+        $category = $inputs["category"];
+        $tag = implode(",",$inputs["tag"]);
+
+        // dd($request);
 
         if(strcmp($online,"Available")==0)
             $online=1;
@@ -431,6 +544,8 @@ class IndexController extends Controller
         $products->online = $online;
         $products->description = $description;
         $products->availability = $availability;
+        $products->category = $category;
+        $products->tags = $tag;
 
         // dd($request->file("featured_image"));
         // print_r("slug : " .$image_slug);
@@ -457,15 +572,63 @@ class IndexController extends Controller
             $products->$store = true;
         }
 
-
         $products->save();
+        $product_id = $products->id;
 
+
+         /**
+         * Fetch and Push images for Gallery
+         */
         
+        $product_gallery_files = $request->file('gallery_file');
+        $file_count = count($product_gallery_files);
+         
+        if($request->hasFile('gallery_file'))
+        {
+            $image_slug = str_slug($inputs['name'], "-");
+            foreach($product_gallery_files as $file) {
+                
+                $product_gallery = new ProductGallery;
+
+                $hardPath = 'upload/gallery/';            
+                $tempPath = substr($image_slug,0,100).'_'.rand(0,9999).'-b.jpg';
+                
+                $product_img = Image::make($file);
+                $product_img->save($hardPath.$tempPath);
+                
+
+                $product_gallery->product_id = $product_id;
+                $product_gallery->image_name = $tempPath;
+                $product_gallery->save();
+                    
+            }
+        }
+
         return redirect("/dashboard");
+    }
 
 
+    public function orders(Request $request){
+
+        $orders = new Order;
+        $orders = Order::paginate(50);
+
+        return view("_particles.orders", compact("orders"));
     }
     
-   
+    public function editOrder(Request $request){
+
+        $id = $request->id;
+        $order = Order::where("id", $id)->first();
+        
+        $product_ids = explode(",", $order->product_ids);
+        array_shift($product_ids);
+        $products = Products::find($product_ids);
+
+        $total_price = 10000;
+
+        return view("_particles.editorder", compact("products", "order", "total_price"));
+
+    }
 
 }

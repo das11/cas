@@ -8,12 +8,14 @@
 				<!-- Product Image -->
 				<div class="col-lg-6">
 					<div class="details_image">
-						<div class="details_image_large"><img src="site_assets/images/details_1.jpg" alt=""><div class="product_extra product_new"><a href="categories.html">New</a></div></div>
-						<div class="details_image_thumbnails d-flex flex-row align-items-start justify-content-between">
-							<div class="details_image_thumbnail active" data-image="site_assets/images/details_1.jpg"><img src="site_assets/images/details_1.jpg" alt=""></div>
-							<div class="details_image_thumbnail" data-image="site_assets/images/details_2.jpg"><img src="site_assets/images/details_2.jpg" alt=""></div>
-							<div class="details_image_thumbnail" data-image="site_assets/images/details_3.jpg"><img src="site_assets/images/details_3.jpg" alt=""></div>
-							<div class="details_image_thumbnail" data-image="site_assets/images/details_4.jpg"><img src="site_assets/images/details_4.jpg" alt=""></div>
+					<div class="details_image_large"><img src="{{ URL::asset("/upload/featured_image/" . $product->featured_image . "-b.jpg")}}" height="600px" alt=""><div class="product_extra product_new"><a href="categories.html">New</a></div></div>
+
+						<div class="details_image_thumbnails d-flex flex-row align-items-start justify-content-start">
+							@foreach ($product_gallery_images as $item => $gallery_img)
+								<div class="details_image_thumbnail active" data-image="{{URL::asset("upload/gallery/".$gallery_img->image_name)}}">
+									<img src="{{URL::asset("upload/gallery/".$gallery_img->image_name)}}" height="200px" style="object-fit:cover" alt="">
+								</div>
+							@endforeach
 						</div>
 					</div>
 				</div>
@@ -22,8 +24,8 @@
 				<div class="col-lg-6">
 					<div class="details_content">
 					<div class="details_name">{{ $product->name }}</div>
-						<div class="details_discount">{{ $product->price }}</div>
-						<div class="details_price">{{ $product->price }}</div>
+						{{-- <div class="details_discount">{{ $product->price }}</div> --}}
+						<div class="details_price">₹{{ $product->price }}</div>
 
 						<!-- In Stock -->
 						<div class="in_stock_container">
@@ -31,7 +33,7 @@
 							<span>In Stock</span>
 						</div>
 						<div class="details_text">
-							<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. Phasellus id nisi quis justo tempus mollis sed et dui. In hac habitasse platea dictumst. Suspendisse ultrices mauris diam. Nullam sed aliquet elit. Mauris consequat nisi ut mauris efficitur lacinia.</p>
+							{!! $product->description !!}
 						</div>
 
 						<!-- Product Quantity -->
@@ -44,7 +46,7 @@
 									<div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fa fa-chevron-down" aria-hidden="true"></i></div>
 								</div>
 							</div>
-							<div class="button cart_button"><a href="/addtocart?id=7">Add to cart</a></div>
+						<div class="button cart_button"><a href="/addtocart?id={{$product->id}}">Add to cart</a></div>
 						</div>
 
 						<!-- Share -->
@@ -61,7 +63,7 @@
 				</div>
 			</div>
 
-			<div class="row description_row">
+			{{-- <div class="row description_row">
 				<div class="col">
 					<div class="description_title_container">
 						<div class="description_title">Description</div>
@@ -71,7 +73,7 @@
 						<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. Phasellus id nisi quis justo tempus mollis sed et dui. In hac habitasse platea dictumst. Suspendisse ultrices mauris diam. Nullam sed aliquet elit. Mauris consequat nisi ut mauris efficitur lacinia.</p>
 					</div>
 				</div>
-			</div>
+			</div> --}}
 		</div>
 	</div>
 

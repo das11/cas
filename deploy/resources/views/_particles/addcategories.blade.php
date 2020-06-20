@@ -38,6 +38,7 @@
                     <li class="list-group-item"><a href="/addproduct">Add Product</a></li>
                     <li class="list-group-item"><a href="/dashboard">Dashboard</a></li>
                     <li class="list-group-item active"><a href="/addcategories" style="color:white">Add Category</a></li>
+                    <li class="list-group-item"><a href="/addtags">Add Tags</a></li>
                    
                    
                   </ul>

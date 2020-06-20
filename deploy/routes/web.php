@@ -50,9 +50,19 @@ Route::post("/pushaddproduct", "IndexController@pushAddProduct");
 Route::get("/editproduct", "IndexController@editProduct");
 Route::post("/pusheditproduct", "IndexController@pushEditProduct");
 
+Route::get("/orders", "IndexController@orders");
+Route::get("/editorder", "IndexController@editorder");
+
 Route::get("/addcategories", "IndexController@addCategories");
 Route::post("/pushaddcategory", "IndexController@pushAddCategories");
 
+Route::get("/addtags", "IndexController@addTags");
+Route::post("/pushaddtag", "IndexController@pushAddTags");
+
+Route::post("/search", "Indexcontroller@search");
+
 Route::get("/cart", "IndexController@cart");
 Route::get('/addtocart', 'IndexController@addToCart');
-Route::get("/checkout", "IndexController@checkout");
+Route::get("/precheckout", "IndexController@precheckout");
+Route::post("/checkout", "IndexController@checkout");
+Route::post("/payment_success", "IndexController@payment_success");

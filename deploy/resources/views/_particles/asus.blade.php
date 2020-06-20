@@ -8,7 +8,7 @@
 					<div class="row">
 						<div class="col">
 							<div class="home_content">
-								<div class="home_title">ASUS Exclusive<span>.</span></div>
+								<div class="home_title">Asus Exclusive<span>.</span></div>
 								<!-- <div class="home_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a ultricies metus. Sed nec molestie eros. Sed viverra velit venenatis fermentum luctus.</p></div> -->
 							</div>
 						</div>
@@ -24,45 +24,50 @@
 		<div class="container">
 			<div class="row">
 				<div class="col">
-					
-					<!-- Product Sorting -->
-					<div class="sorting_bar d-flex flex-md-row flex-column align-items-md-center justify-content-md-start">
-						<div class="results">Showing <span>12</span> results</div>
-						<div class="sorting_container ml-md-auto">
-							<div class="sorting">
-								<ul class="item_sorting">
-									<li>
-										<span class="sorting_text">Sort by</span>
-										<i class="fa fa-chevron-down" aria-hidden="true"></i>
-										<ul>
-											<li class="product_sorting_btn" data-isotope-option='{ "sortBy": "original-order" }'><span>Default</span></li>
-											<li class="product_sorting_btn" data-isotope-option='{ "sortBy": "price" }'><span>Price</span></li>
-											<li class="product_sorting_btn" data-isotope-option='{ "sortBy": "stars" }'><span>Name</span></li>
-										</ul>
-									</li>
-								</ul>
+
+					<div class="search_panel trans_300">
+						<div class="container">
+							<div class="row">
+								<div class="col">
+									<div class="search_panel_content d-flex flex-row align-items-center justify-content-end">
+										{!! Form::open(array('url' => '/search','class'=>'','id'=>'signup','role'=>'form', 'enctype' => 'multipart/form-data')) !!}
+										<form action="#">
+											<input type="text | submit" name="key" class="search_input" placeholder="Search" required="required">
+										</form>
+										{!! Form::close() !!} 
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
+				
 				</div>
 			</div>
+
+
 			<div class="row">
 				<div class="col">
 					
 					<div class="product_grid">
 
-						<!-- Product -->
-						<div class="product">
-							<div class="product_image"><img src="site_assets/images/product_1.jpg" alt=""></div>
-							<div class="product_extra product_new"><a href="categories.html">New</a></div>
-							<div class="product_content">
-								<div class="product_title"><a href="product.html">Smart Phone</a></div>
-								<div class="product_price">$670</div>
+						@foreach ($products as $product)
+							<!-- Product -->
+							<div class="product">
+							<div class="product_image">
+								<a href="/product?id={{ $product->id }}">
+									<img src="{{URL::asset("upload/featured_image/". $product->featured_image . "-b.jpg")}}" height="250px"
+								style="object-fit: cover" alt="">
+								</a>
 							</div>
-						</div>
+							<div class="product_extra product_new"><a href="/product?id={{ $product->id }}">New</a></div>
+								<div class="product_content">
+									<div class="product_title"><a href="/product?id={{ $product->id }}">{{ $product->name }}</a></div>
+								<div class="product_price">{{ $product->price }}</div>
+								</div>
+							</div>
+						@endforeach
 
-						<!-- Product -->
-						<div class="product">
+						{{-- <div class="product">
 							<div class="product_image"><img src="site_assets/images/product_2.jpg" alt=""></div>
 							<div class="product_extra product_sale"><a href="categories.html">Sale</a></div>
 							<div class="product_content">
@@ -71,7 +76,6 @@
 							</div>
 						</div>
 
-						<!-- Product -->
 						<div class="product">
 							<div class="product_image"><img src="site_assets/images/product_3.jpg" alt=""></div>
 							<div class="product_content">
@@ -80,7 +84,6 @@
 							</div>
 						</div>
 
-						<!-- Product -->
 						<div class="product">
 							<div class="product_image"><img src="site_assets/images/product_4.jpg" alt=""></div>
 							<div class="product_content">
@@ -89,7 +92,6 @@
 							</div>
 						</div>
 
-						<!-- Product -->
 						<div class="product">
 							<div class="product_image"><img src="site_assets/images/product_5.jpg" alt=""></div>
 							<div class="product_content">
@@ -98,7 +100,6 @@
 							</div>
 						</div>
 
-						<!-- Product -->
 						<div class="product">
 							<div class="product_image"><img src="site_assets/images/product_6.jpg" alt=""></div>
 							<div class="product_extra product_hot"><a href="categories.html">Hot</a></div>
@@ -108,7 +109,6 @@
 							</div>
 						</div>
 
-						<!-- Product -->
 						<div class="product">
 							<div class="product_image"><img src="site_assets/images/product_7.jpg" alt=""></div>
 							<div class="product_content">
@@ -117,7 +117,6 @@
 							</div>
 						</div>
 
-						<!-- Product -->
 						<div class="product">
 							<div class="product_image"><img src="site_assets/images/product_8.jpg" alt=""></div>
 							<div class="product_extra product_sale"><a href="categories.html">Hot</a></div>
@@ -127,7 +126,6 @@
 							</div>
 						</div>
 
-						<!-- Product -->
 						<div class="product">
 							<div class="product_image"><img src="site_assets/images/product_9.jpg" alt=""></div>
 							<div class="product_extra product_sale"><a href="categories.html">Hot</a></div>
@@ -137,7 +135,6 @@
 							</div>
 						</div>
 
-						<!-- Product -->
 						<div class="product">
 							<div class="product_image"><img src="site_assets/images/product_10.jpg" alt=""></div>
 							<div class="product_extra product_sale"><a href="categories.html">Hot</a></div>
@@ -147,7 +144,6 @@
 							</div>
 						</div>
 
-						<!-- Product -->
 						<div class="product">
 							<div class="product_image"><img src="site_assets/images/product_11.jpg" alt=""></div>
 							<div class="product_extra product_sale"><a href="categories.html">Hot</a></div>
@@ -157,7 +153,6 @@
 							</div>
 						</div>
 
-						<!-- Product -->
 						<div class="product">
 							<div class="product_image"><img src="site_assets/images/product_12.jpg" alt=""></div>
 							<div class="product_extra product_sale"><a href="categories.html">Hot</a></div>
@@ -165,7 +160,7 @@
 								<div class="product_title"><a href="product.html">Smart Phone</a></div>
 								<div class="product_price">$580</div>
 							</div>
-						</div>
+						</div> --}}
 
 					</div>
 					<div class="product_pagination">

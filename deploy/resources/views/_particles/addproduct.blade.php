@@ -33,7 +33,8 @@
 						
 					<li class="list-group-item active"><a href="/addproduct" style="color:white">Add Product</a></li>
                     <li class="list-group-item"><a href="/dashboard">Dashboard</a></li>
-                    <li class="list-group-item"><a href="/addcategories">Add Category</a></li>
+					<li class="list-group-item"><a href="/addcategories">Add Category</a></li>
+					<li class="list-group-item"><a href="/addtags" >Add Tags</a></li>
 					
 					
 					</ul>
@@ -87,10 +88,10 @@
 								</div>
 								<br>
 								<div class="form-group row">
-									<label for="status" class="col-md-3 col-form-label"><b>Product Type</b></label>
+									<label for="status" class="col-md-3 col-form-label"><b>Category</b></label>
 									<div class="col-md-9">
 							
-										<select name="availability" id="select-status" class="form-control">
+										<select name="category" id="select-status" class="form-control">
 											<option value="select">Select</option>
 											@foreach ($categories as $category)
 												<option value="{{$category->category_name}}">{{$category->category_name}}</option>	
@@ -98,7 +99,20 @@
 
 										</select>
 									</div>
-								
+								</div>
+
+								<div class="form-group row">
+									<label for="status" class="col-md-3 col-form-label"><b>Product Tag</b></label>
+									<div class="col-md-9">
+							
+										<select multiple name="tag" id="select-status" class="form-control">
+											<option value="select">Select</option>
+											@foreach ($tags as $tag)
+												<option value="{{$tag->tag_name}}">{{$tag->tag_name}}</option>	
+											@endforeach
+
+										</select>
+									</div>
 								</div>
 
 								<div class="form-group row">

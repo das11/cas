@@ -161,7 +161,7 @@
 							</li>
 						</ul>
 					</div>
-					<div class="button checkout_button"><a href="/checkout?cart_id={{ $cart->id }}">Proceed to checkout</a></div>
+					<div class="button checkout_button"><a href="/precheckout?cart_id={{ $cart->id }}">Proceed to checkout</a></div>
 				</div>
 			</div>
 		</div>

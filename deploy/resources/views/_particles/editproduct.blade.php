@@ -33,7 +33,8 @@
 						
 					<li class="list-group-item active"><a href="/addproduct" style="color:white">Add Product</a></li>
                     <li class="list-group-item"><a href="/dashboard">Dashboard</a></li>
-                    <li class="list-group-item"><a href="/addcategories">Add Category</a></li>
+					<li class="list-group-item"><a href="/addcategories">Add Category</a></li>
+					<li class="list-group-item"><a href="/addtags">Add Tags</a></li>
 					
 					
 					</ul>
@@ -54,7 +55,7 @@
 									
 									<label for="contact_company"><b>Product Name</b></label>
 									<br>
-								<input name="name" id="contact_company" placeholder="Product Name" type="text" value="{{ $product->name }}" class="form-control">
+										<input name="name" id="contact_company" placeholder="{{ $product->name }}" type="text" value="{{ $product->name }}" class="form-control">
 								</div>
 								<br>
 								<div>
@@ -84,16 +85,56 @@
 									@endif
 								</div>
 								<br>
+								<div class="form-group">
+									<label for="contact_compan"><b>Add Gallery Images</b></label>
+									<br><br>
+									<input type="file" name="gallery_file[]" multiple id="input-file" class="form-control-file">
+								</div>
+								<div class="preview_image mb-2">
+									<img id="output_image" style="max-height : 200px"/>
+								</div>
+								<br>
+								
+								<div class="form-group">
+									<div class="details_image">
+										<div class="details_image_thumbnails d-flex flex-row align-items-start justify-content-start">
+											@foreach ($product_gallery_images as $i => $gallery_img)
+												<div class="details_image_thumbnail" data-image="{{ URL::asset('upload/gallery/'.$gallery_img->image_name) }}">
+													<img src="{{ URL::asset('upload/gallery/'.$gallery_img->image_name) }}" height="200px" style="object-fit: cover" alt="">
+												</div>
+											@endforeach
+										</div>
+									</div>
+								</div>
+
 								<div class="form-group row">
-									<label for="status" class="col-md-3 col-form-label"><b>Product Type</b></label>
+									<label for="status" class="col-md-3 col-form-label"><b>Category</b></label>
 									<div class="col-md-9">
 							
-										<select name="availability" id="select-status" class="form-control">
+										<select name="category" id="select-status" class="form-control">
 											<option value="select">Select</option>
 											@foreach ($categories as $category)
 												<option value="{{$category->category_name}}">{{$category->category_name}}</option>	
 											@endforeach
 								
+										</select>
+									</div>
+								</div>
+
+								<div class="form-group row">
+									<label for="status" class="col-md-3 col-form-label"><b>Product Tag</b></label>
+									<div class="col-md-9">
+										<select multiple name="tag[]" id="select-status" class="form-control">
+											<option value="select">Select</option>
+											@foreach ($tags as $tag)
+												@if ( strpos($selectedTags, $tag->tag_name) !== false)
+													<option selected value="{{$tag->tag_name}}">{{$tag->tag_name}}</option>	
+												@else
+													<option value="{{$tag->tag_name}}">{{$tag->tag_name}}</option>
+												@endif
+												
+											@endforeach
+
 										</select>
 									</div>
 								</div>

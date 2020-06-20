@@ -153,7 +153,7 @@
 					</div> -->
 					<div class="avds_small_content">
 						<div class="avds_title">ASUS Exclusive</div>
-						<div class="avds_link"><a href="categories.html">See More</a></div>
+						<div class="avds_link"><a href="/asus">See More</a></div>
 					</div>
 				</div>
 			</div>
@@ -172,7 +172,7 @@
 					</div> -->
 					<div class="avds_small_content">
 						<div class="avds_title">HP World</div>
-						<div class="avds_link"><a href="categories.html">See More</a></div>
+						<div class="avds_link"><a href="/hp">See More</a></div>
 					</div>
 				</div>
 			</div>
@@ -190,7 +190,7 @@
 					</div> -->
 					<div class="avds_small_content">
 						<div class="avds_title">Xiaomi Exclusive</div>
-						<div class="avds_link"><a href="categories.html">See More</a></div>
+						<div class="avds_link"><a href="/xiaomi">See More</a></div>
 					</div>
 				</div>
 			</div>
@@ -205,12 +205,10 @@
 			<div class="row">
 				<div class="col">
 					
-					<div class="product_grid">
+					{{-- <div class="product_grid">
 
-						{{-- @foreach ($products as $product) --}}
 							
 
-						<!-- Product -->
 						<div class="product">
 							<div class="product_image"><img src="site_assets/images/product_1.jpg" alt=""></div>
 							<div class="product_extra product_new"><a href="categories.html">New</a></div>
@@ -220,7 +218,6 @@
 							</div>
 						</div>
 
-						<!-- Product -->
 						<div class="product">
 							<div class="product_image"><img src="site_assets/images/product_2.jpg" alt=""></div>
 							<div class="product_extra product_sale"><a href="categories.html">Sale</a></div>
@@ -230,7 +227,6 @@
 							</div>
 						</div>
 
-						<!-- Product -->
 						<div class="product">
 							<div class="product_image"><img src="site_assets/images/product_3.jpg" alt=""></div>
 							<div class="product_content">
@@ -239,7 +235,6 @@
 							</div>
 						</div>
 
-						<!-- Product -->
 						<div class="product">
 							<div class="product_image"><img src="site_assets/images/product_4.jpg" alt=""></div>
 							<div class="product_content">
@@ -248,7 +243,7 @@
 							</div>
 						</div>
 
-					</div>
+					</div> --}}
 						
 				</div>
 			</div>
